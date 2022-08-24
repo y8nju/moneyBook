@@ -4,7 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import {Link} from 'react-router-dom'
 
 function Header() {
-	return ( <Navbar bg="white" variant="light" className="navbar-expand-lg">
+	return ( <Navbar sticky="top" bg="white" variant="light" className="navbar-expand-lg">
 		<Container>
 			<Navbar.Brand href="#home">Navbar</Navbar.Brand>
 			<Nav className="me-auto">

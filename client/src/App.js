@@ -1,5 +1,6 @@
 // import logo from './logo.svg';
 import { useEffect } from "react";
+import { Container } from "react-bootstrap";
 import {  BrowserRouter,  Routes,  Route, useNavigate } from "react-router-dom";
 import './App.css';
 import Index from "./components";
@@ -12,17 +13,17 @@ function App() {
 
 	}, [])
 	return (
-		<div className="container ">
-				<BrowserRouter>
-					<Header />
+			<BrowserRouter>
+				<Header />
+				<Container>
 					<Routes>
 						<Route >
 							<Route path="/" element={<Index />} />
 							<Route path="/login" element={<Login />} />
 						</Route>
 					</Routes>
-				</BrowserRouter>
-		</div>
+				</Container>
+			</BrowserRouter>
 	);
 }
 

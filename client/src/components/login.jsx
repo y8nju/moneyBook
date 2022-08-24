@@ -1,5 +1,6 @@
 
 import { useRef } from "react";
+import { Button, Card, Container, FloatingLabel, Form } from "react-bootstrap";
 import authAPI from '../api/authAPI';
 
 function Login() {
@@ -24,22 +25,32 @@ function Login() {
 			})
 			.catch(e => console.log(e)) */
 	}
-	return ( <>
-		<h2 className="mt-5 mb-5">Login</h2>
-		<form onSubmit={handleSubmit} className="mt-5">
-			<div className="form-floating mb-3 mt-3">
-			<input type="text" className="form-control" id="email" placeholder="Enter email" name="email" ref={emailInp} />
-			<label htmlFor="email">Email</label>
-			</div>
-			<div className="form-floating mt-3 mb-3">
-			<input type="password" className="form-control" id="pwd" placeholder="Enter password" name="pswd" ref={passInp} />
-			<label htmlFor="pwd">Password</label>
-			</div>
-			<div className="mb-3 mt-3 d-grid">
-				<button type="submit" className="btn btn-primary bnt-block">Submit</button>
-			</div>
-		</form>
-		</> );
+	return ( <div className="d-flex justify-content-center align-items-center" style={{ height: '95vh' }}>
+		<Form onSubmit={handleSubmit}>
+			<Card style={{width: '300px'}}>
+				<Card.Header className="bg-white border-0 px-4 pt-5 pb-0">
+					<h2 className="pb-4 mb-0 border-bottom">MoneyBook</h2>
+				</Card.Header>
+				<Card.Body className="p-4">
+						<FloatingLabel
+							controlId="floatingInput"
+							label="Email address"
+							className="mb-4"
+						>
+							<Form.Control type="email" placeholder="name@example.com" name="email" ref={emailInp}  />
+						</FloatingLabel>
+						<FloatingLabel controlId="floatingPassword" label="Password">
+							<Form.Control type="password" placeholder="Password" name="pswd" ref={passInp} />
+						</FloatingLabel>
+				</Card.Body>
+				<Card.Footer className="bg-white p-4 pb-5 d-grid">
+					<button type="submit" className="bnt-block p-3 fs-6" sytle={{borderColor: '#dddddd'}}>
+						Login
+					</button>
+				</Card.Footer>
+			</Card>
+		</Form>
+	</div>);
 }
 
 export default Login;
