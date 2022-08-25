@@ -30,7 +30,7 @@ function Login() {
 			})
 			.catch(e => console.log(e)) */
 	}
-	return ( <div className="d-flex justify-content-center align-items-center" style={{ height: '90vh' }}>
+	return ( <div className="d-flex justify-content-center align-items-center" id="login">
 		<Form onSubmit={handleSubmit}>
 			<Card style={{width: '300px'}}>
 				<Card.Header className="bg-white border-0 px-4 pt-5 pb-0">
@@ -49,8 +49,8 @@ function Login() {
 						</FloatingLabel>
 				</Card.Body>
 				<Card.Footer className="bg-white p-4 pb-5 d-grid">
-					<Button type="submit" className="bnt-block p-3 fs-6" sytle={{borderColor: '#dddddd'}}>
-						Login
+					<Button type="submit" className="bnt-block p-3 fs-6 btnPrimary">
+						로그인
 					</Button>
 				</Card.Footer>
 			</Card>
