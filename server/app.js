@@ -7,8 +7,7 @@ import account from './router/account.js'
 
 const app = express();
 dotenv.config()
-const uri = process.env.MONGODB_URI;
-mongoose.connect(uri, {dbName: 'moneybook'}).catch((err) => {
+mongoose.connect(process.env.MONGODB_URI, {dbName: 'moneybook'}).catch((err) => {
 	console.log('failed' + err.message);
 });
 

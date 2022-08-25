@@ -8,33 +8,34 @@ import Account from '../model/account.js';
 */
 // login
 router.post('/auth',async(req, res) =>{
-	console.log(req.body);
-	let getId = await Account.findOne({id: req.body.email});
-	if(getId) {	// id의 유무를 체크하고
-		const check = await bcrypt.compare(req.body.password, getId.password)	// 암호화 한 password 체크
-		if(check) {	// id가 있을 때 password의 동일여부를 확인해준다
-			res.json({result: true});
+	try {
+		const {email, password} =  req.body;
+		let getId = await Account.findOne({email});
+		const check = bcrypt.compareSync(password, getId.password)	// 암호화 한 password 체크
+		if(getId && check) {
+			res.status(201).json({result: true, message: getId})
 		}else {
-			res.json({result: false});
+			throw new Error("invalid username / password");
 		}
-	}else {
-		res.json({result: false});
+	}catch(e) {
+		res.status(409).json({result: false, message: e.message})
 	}
+	
 })
 
 // signup
 router.post('/register', async (req, res) =>{
 	const salt = 10;
-	const hash = await bcrypt.hash(req.body.password, salt); // password 암호화
 	let getId = await Account.findOne({email: req.body.email});
-	if(!getId) {
-		await Account.create({
-			...req.body,
-			password:  hash
-		});
-		res.json({result: true})
-	}else {
-		res.json({result: false})
+	const hash = bcrypt.hashSync(req.body.password, salt); // password 암호화
+	let data = await Account.create({
+		...req.body,
+		password:  hash
+	});
+	try {
+		res.status(201).json({result: true, message: data})
+	} catch(e) {
+		res.status(409).json({result: false, message: e.message})
 	}
 })
 
