@@ -4,3 +4,9 @@
 nav + .container {
     height: 100%;
 }
+
+@media (max-width: 767.98px) {
+    #singup {
+        width: 75% !important;
+    }
+}

@@ -3,13 +3,15 @@ import morgan from 'morgan'
 import cors from 'cors';
 import dotenv from 'dotenv'
 import mongoose from 'mongoose'
-import account from './router/account.js'
+import account from './router/accountRoute.js'
+import history from './router/historyRoute.js'
 
-const app = express();
 dotenv.config()
 mongoose.connect(process.env.MONGODB_URI, {dbName: 'moneybook'}).catch((err) => {
 	console.log('failed' + err.message);
 });
+
+const app = express();
 
 app.use(cors());
 app.use(morgan('[Server] :date[iso] :method :url :status (:response-time ms)' ))
@@ -17,6 +19,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 app.use('/api/account', account)
+app.use('/api/history', history)
 
 app.listen(8080, ()=> {
 	console.log('server start')

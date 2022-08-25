@@ -1,17 +1,22 @@
 
 import { useRef } from "react";
-import { Button, Card, Container, FloatingLabel, Form } from "react-bootstrap";
+import { Button, Card, FloatingLabel, Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import authAPI from '../api/authAPI';
 
 function Login() {
 	const emailInp = useRef();
 	const passInp = useRef();
+	const navigator =useNavigate();
 	
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		authAPI
 			.login(emailInp.current.value, passInp.current.value)
-			.then(ret => console.log(ret));
+			.then(ret => {
+				console.log(ret)
+				navigator('/history');
+			});
 		/* // 위랑 동일
 		const data ={email: emailInp.current.value , pw: passInp.current.value}
 		fetch('http://192.168.4.123:8080/api/login', {
@@ -25,28 +30,28 @@ function Login() {
 			})
 			.catch(e => console.log(e)) */
 	}
-	return ( <div className="d-flex justify-content-center align-items-center" style={{ height: '95vh' }}>
+	return ( <div className="d-flex justify-content-center align-items-center" style={{ height: '90vh' }}>
 		<Form onSubmit={handleSubmit}>
 			<Card style={{width: '300px'}}>
 				<Card.Header className="bg-white border-0 px-4 pt-5 pb-0">
-					<h2 className="pb-4 mb-0 border-bottom">쓰는 습관<i class="bi bi-calculator"></i></h2>
+					<h2 className="pb-4 mb-0 border-bottom">쓰는 습관<i className="bi bi-calculator"></i></h2>
 				</Card.Header>
 				<Card.Body className="p-4">
 						<FloatingLabel
 							controlId="floatingInput"
-							label="Email address"
+							label="이메일"
 							className="mb-4"
 						>
 							<Form.Control type="email" placeholder="name@example.com" name="email" ref={emailInp}  />
 						</FloatingLabel>
-						<FloatingLabel controlId="floatingPassword" label="Password">
+						<FloatingLabel controlId="floatingPassword" label="비밀번호">
 							<Form.Control type="password" placeholder="Password" name="pswd" ref={passInp} />
 						</FloatingLabel>
 				</Card.Body>
 				<Card.Footer className="bg-white p-4 pb-5 d-grid">
-					<button type="submit" className="bnt-block p-3 fs-6" sytle={{borderColor: '#dddddd'}}>
+					<Button type="submit" className="bnt-block p-3 fs-6" sytle={{borderColor: '#dddddd'}}>
 						Login
-					</button>
+					</Button>
 				</Card.Footer>
 			</Card>
 		</Form>
