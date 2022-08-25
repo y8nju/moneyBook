@@ -1,7 +1,7 @@
 import express from 'express'
-import api from './router/api.js'
 import morgan from 'morgan'
 import cors from 'cors';
+import api from './router/api.js'
 
 const app = express();
 
@@ -13,5 +13,16 @@ app.use(express.json());
 app.use('/api', api)
 
 app.listen(8080, ()=> {
-    console.log('server start')
+	console.log('server start')
 })
+
+/* 
+	[설치한 모듈]
+	cors
+	morgan
+	express
+	mongodb
+	mongoose
+	dotenv: npm i dotenv
+	jsonwebtoken: npm i jsonwebtoken
+*/

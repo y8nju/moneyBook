@@ -29,7 +29,7 @@ function Login() {
 		<Form onSubmit={handleSubmit}>
 			<Card style={{width: '300px'}}>
 				<Card.Header className="bg-white border-0 px-4 pt-5 pb-0">
-					<h2 className="pb-4 mb-0 border-bottom">MoneyBook</h2>
+					<h2 className="pb-4 mb-0 border-bottom">쓰는 습관<i class="bi bi-calculator"></i></h2>
 				</Card.Header>
 				<Card.Body className="p-4">
 						<FloatingLabel
