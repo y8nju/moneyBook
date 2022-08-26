@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { Alert, Button, Card, FloatingLabel, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-function Login({accountAPI, setLogon}) {
+function Login({accountAPI, setLogon, setToken}) {
 	const emailInp = useRef();
 	const passInp = useRef();
 	const navigator =useNavigate();
@@ -12,11 +12,12 @@ function Login({accountAPI, setLogon}) {
 		event.preventDefault();
 		accountAPI
 			.auth(emailInp.current.value, passInp.current.value)
-				.then(ret => {
-					console.log(ret)
-					if(ret.result) {
-						navigator('/history');
-						setLogon(ret.result)
+				.then(received => {
+					console.log(received)
+					if(received.result) {
+						setLogon(received.result);	// 로그온 상태를 true로 설정한다
+						setToken(received.token);	// 토큰 저장한다
+						navigator('/history');	// 페이지 전환
 					}else {
 						navigator('/login')
 					}

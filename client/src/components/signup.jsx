@@ -1,9 +1,8 @@
 import { useRef } from "react";
 import { Button, Form, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import AccountAPI from "../api/AccountAPI";
 
-function Signup() {
+function Signup({accountAPI}) {
 	const navigator = useNavigate();
 	const rows =[]
 	const birthArr = () => {
@@ -20,7 +19,7 @@ function Signup() {
 	
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		AccountAPI('http://192.168.4.123:8080')
+		accountAPI
 			.signup(email.current.value, password.current.value, name.current.value, gender.current.value, Number(birth.current.value))
 			.then(ret => {
 				console.log(ret);
