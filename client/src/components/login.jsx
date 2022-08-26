@@ -2,16 +2,15 @@
 import { useRef } from "react";
 import { Alert, Button, Card, FloatingLabel, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import AccountAPI from '../api/AccountAPI';
 
-function Login() {
+function Login({accountAPI}) {
 	const emailInp = useRef();
 	const passInp = useRef();
 	const navigator =useNavigate();
 	
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		AccountAPI('192.168.4.123:8080')
+		accountAPI
 			.login(emailInp.current.value, passInp.current.value)
 				.then(ret => {
 					console.log(ret)
