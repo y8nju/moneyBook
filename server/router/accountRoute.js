@@ -7,6 +7,17 @@ import Account from '../model/account.js';
 /* 
 	password 암호화를 위해, bcrypt 모듈을 이용한다
 */
+	// 새로고침을 하더라도 token 유지하기
+router.post('/valid', async (req, res) => {
+	console.log(req.body);
+	try {
+		const data = jwt.verify(req.body.token, process.env.SECRET_KEY);
+		res.status(200).json({result: true, user: data.email});
+	} catch(e) {
+		res.status(401).json({result: false, message: e.message});
+	}
+})
+
 // login
 router.post('/auth',async(req, res) =>{
 	try {

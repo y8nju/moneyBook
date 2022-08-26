@@ -1,6 +1,8 @@
 import express from 'express';
-import jwt from 'jsonwebtoken';
 const router = express.Router();
+import jwt from 'jsonwebtoken';
+import History from '../model/history.js';
+
 
 //auth token check middleware
 // 기존에는 session으로 썼지만, ✨ 지금부터는 token으로 한다
@@ -29,5 +31,15 @@ router.get('/', (req, res) => {
 router.get('/delete', (req, res) => {
 	console.log(req.logonEmail )
 	return res.status(200).json({result: false});
+})
+router.post('/write', async (req, res) => {
+	try {
+		let data = await History.create({...req.body});
+		res.status(201).json({result: true, message: data});
+		console.log(data);
+	} catch(e) {
+		res.status(409).json({result: false, message: e.message});
+		console.log(e.message)
+	}
 })
 export default router;
