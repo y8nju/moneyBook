@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { Alert, Button, Card, FloatingLabel, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-function Login({accountAPI}) {
+function Login({accountAPI, setLogon}) {
 	const emailInp = useRef();
 	const passInp = useRef();
 	const navigator =useNavigate();
@@ -11,11 +11,12 @@ function Login({accountAPI}) {
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		accountAPI
-			.login(emailInp.current.value, passInp.current.value)
+			.auth(emailInp.current.value, passInp.current.value)
 				.then(ret => {
 					console.log(ret)
 					if(ret.result) {
 						navigator('/history');
+						setLogon(ret.result)
 					}else {
 						navigator('/login')
 					}
