@@ -1,13 +1,15 @@
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Alert, Button, Card, FloatingLabel, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-function Login({accountAPI, setLogon, setToken}) {
+function Login({accountAPI, setLogon}) {
 	const emailInp = useRef();
 	const passInp = useRef();
 	const navigator =useNavigate();
 	
+	const [error, setError] = useState(false);
+
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		accountAPI
@@ -16,9 +18,11 @@ function Login({accountAPI, setLogon, setToken}) {
 					console.log(received)
 					if(received.result) {
 						setLogon(received.result);	// 로그온 상태를 true로 설정한다
-						setToken(received.token);	// 토큰 저장한다
+						localStorage.setItem('token', received.token);	// ✨localStorage에 토큰을 저장한다
+						setError(false);	// 통신 성공 시 에러 없음
 						navigator('/history');	// 페이지 전환
 					}else {
+						setError(true);	// 통신 실패시 에러 있음
 						navigator('/login')
 					}
 				})

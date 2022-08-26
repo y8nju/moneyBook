@@ -1,0 +1,16 @@
+<html>
+	<script>
+		// create: setItem("key", "value")으로 localStorage에 저장
+		// update: setItem("key", "value") 같은 이름이면 업데이트
+		localStorage.setItem("key", "dfdsadfwe3234sdff");
+		// read: getItem("key") 읽어오기
+		console.log(localStorage.getItem("key"));
+		setTimeout(()=> {
+			// remove: removeItem("key") 삭제
+			localStorage.removeItem("key");
+			console.log(localStorage.getItem("key"));
+		}, 10000)
+
+		// delete: clear() 모두 삭제
+	</script>
+</html>

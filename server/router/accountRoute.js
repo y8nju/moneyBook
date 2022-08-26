@@ -19,7 +19,8 @@ router.post('/auth',async(req, res) =>{
 			// 응답 보낼 때, token도 같이 보낸다
 			res.status(201).json({result: true, message: getId, token});
 		}else {
-			throw new Error("invalid username / password");
+			// throw new Error("invalid username / password");
+			res.status(401).json({result: false, message: '아이디 혹은 비밀번호가 유효하지 않습니다'})
 		}
 	}catch(e) {
 		res.status(409).json({result: false, message: e.message})

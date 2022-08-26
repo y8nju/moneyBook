@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom'
 function Header() {
 	return ( <Navbar sticky="top" bg="white" variant="light" className="navbar-expand-lg">
 		<Container>
-			<Navbar.Brand href="#home"><i className="bi bi-calculator"></i>쓰는 습관</Navbar.Brand>
+			<Link to="/" className="navbar-brand"><i className="bi bi-calculator"></i>쓰는 습관</Link>
 			<Nav className="me-auto">
 				<Link to="/" className="nav-link">쓰다</Link>
 				{/* router-dom Link */}

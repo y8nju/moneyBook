@@ -2,7 +2,7 @@ import { Card } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from "react-router-dom";
 
-function Index() {    
+function Main() {    
 	const navigate = useNavigate();
 	const moveLogin = () => {
 		navigate('/login');
@@ -20,4 +20,4 @@ function Index() {
   </Card> );
 }
 
-export default Index;
+export default Main;
