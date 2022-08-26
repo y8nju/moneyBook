@@ -26,7 +26,7 @@ class HistoryAPI {
 	async addHistory(pattern, date, useDesc, cashAmt, cardAmt, catefory, tag) {
 		const response = await fetch(this.baseURL+"/api/history/write", {
 			...this.postOption,
-			boody: JSON.stringify({pattern, date, useDesc, cashAmt, cardAmt, catefory, tag})
+			body: JSON.stringify({pattern, date, useDesc, cashAmt, cardAmt, catefory, tag})
 		});
 		return await response.json();
 	}

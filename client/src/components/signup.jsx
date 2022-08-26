@@ -58,8 +58,8 @@ function Signup({accountAPI}) {
 					</Form.Select>
 				</Form.Group>
 			</Row>
-			<Row className="d-grid w-100 mx-0 mt-4">
-				<Button type="submit" className="bnt-block p-3 fs-6 btnPrimary" sytle={{borderColor: '#dddddd'}}>
+			<Row className="d-grid w-100 mx-0 mt-5">
+				<Button type="submit" className="bnt-block p-2 fs-6 btnPrimary">
 					회원가입
 				</Button>
 			</Row>

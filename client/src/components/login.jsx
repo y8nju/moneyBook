@@ -1,6 +1,6 @@
 
 import { useRef, useState } from "react";
-import { Alert, Button, Card, FloatingLabel, Form } from "react-bootstrap";
+import { Alert, Button, Card, Container, FloatingLabel, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 function Login({accountAPI, setLogon}) {
@@ -42,9 +42,9 @@ function Login({accountAPI, setLogon}) {
 			})
 			.catch(e => console.log(e)) */
 	}
-	return ( <div className="d-flex flex-column justify-content-center align-items-center" id="login">
+	return ( <Container className="my-auto" id="login">
 		<Form onSubmit={handleSubmit}>
-			<Card style={{width: '300px'}}>
+			<Card className="mx-auto" style={{width: '300px'}}>
 				<Card.Header className="bg-white border-0 px-4 pt-5 pb-0">
 					<h2 className="pb-4 mb-0 border-bottom">쓰는 습관<i className="bi bi-calculator"></i></h2>
 				</Card.Header>
@@ -69,7 +69,7 @@ function Login({accountAPI, setLogon}) {
 			</Card>
 		</Form>
         {/* <Alert  variant="dark">계정을 확인하세요</Alert> */}
-	</div>);
+	</Container>);
 }
 
 export default Login;

@@ -37,7 +37,7 @@ function History({datas, historyAPI}) {
 			<Modal.Title>내역 입력</Modal.Title>
 		</Modal.Header>
 		<Modal.Body>
-			<Write  historyAPI={historyAPI }></Write>
+			<Write  historyAPI={historyAPI }  setShow={setShow}></Write>
 		</Modal.Body>
 		</Modal>
 	</div> );

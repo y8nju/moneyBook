@@ -4,9 +4,7 @@
 nav + .container {
     height: 100%;
 }
-#login, #signup {
-    height: 85vh;
-}
+
 .input-group-text {
     min-width: 120px
 }

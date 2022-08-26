@@ -32,7 +32,8 @@ router.get('/delete', (req, res) => {
 	console.log(req.logonEmail )
 	return res.status(200).json({result: false});
 })
-router.post('/write', async (req, res) => {
+router.post('/write', async (req, res) =>{
+	console.log({...req.body})
 	try {
 		let data = await History.create({...req.body});
 		res.status(201).json({result: true, message: data});

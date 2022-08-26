@@ -3,7 +3,7 @@ import { Button, Form, InputGroup, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 
-function Write({historyAPI}) {
+function Write({historyAPI, setShow}) {
 	const navigator =useNavigate();
 
 	const pattern = useRef();
@@ -13,13 +13,18 @@ function Write({historyAPI}) {
 	const cardAmt = useRef();
 	const catefory = useRef();
 	const tag = useRef();
+	console.log(historyAPI.addHistory)
+	
 	const handleSubmit = (evnet) => {
 		evnet.preventDefault();
 		historyAPI
 			.addHistory(pattern.current.value, date.current.value, useDesc.current.value, cashAmt.current.value, cardAmt.current.value, catefory.current.value, tag.current.value)
 			.then(received => {
 				if(received.result) {
-					navigator('/');
+					if(setShow) {
+						setShow(false);
+					}
+					navigator('/')
 				}
 			})
 			.catch(e => {
