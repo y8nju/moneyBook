@@ -44,4 +44,7 @@ router.post('/register', async (req, res) =>{
 	}
 })
 
+// id Check
+// router.post('/idChk', async )
+
 export default router;

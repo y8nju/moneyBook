@@ -1,8 +1,8 @@
 
 import { useRef } from "react";
-import { Button, Card, FloatingLabel, Form } from "react-bootstrap";
+import { Alert, Button, Card, FloatingLabel, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import authAPI from '../api/authAPI';
+import AccountAPI from '../api/AccountAPI';
 
 function Login() {
 	const emailInp = useRef();
@@ -11,12 +11,19 @@ function Login() {
 	
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		authAPI
+		AccountAPI('192.168.4.123:8080')
 			.login(emailInp.current.value, passInp.current.value)
-			.then(ret => {
-				console.log(ret)
-				navigator('/history');
-			});
+				.then(ret => {
+					console.log(ret)
+					if(ret.result) {
+						navigator('/history');
+					}else {
+						navigator('/login')
+					}
+				})
+				.catch(e => {
+					console.log(e)
+				})
 		/* // 위랑 동일
 		const data ={email: emailInp.current.value , pw: passInp.current.value}
 		fetch('http://192.168.4.123:8080/api/login', {
@@ -30,7 +37,7 @@ function Login() {
 			})
 			.catch(e => console.log(e)) */
 	}
-	return ( <div className="d-flex justify-content-center align-items-center" id="login">
+	return ( <div className="d-flex flex-column justify-content-center align-items-center" id="login">
 		<Form onSubmit={handleSubmit}>
 			<Card style={{width: '300px'}}>
 				<Card.Header className="bg-white border-0 px-4 pt-5 pb-0">
@@ -44,6 +51,7 @@ function Login() {
 						>
 							<Form.Control type="email" placeholder="name@example.com" name="email" ref={emailInp}  />
 						</FloatingLabel>
+						<p></p>
 						<FloatingLabel controlId="floatingPassword" label="비밀번호">
 							<Form.Control type="password" placeholder="Password" name="pswd" ref={passInp} />
 						</FloatingLabel>
@@ -55,6 +63,7 @@ function Login() {
 				</Card.Footer>
 			</Card>
 		</Form>
+        {/* <Alert  variant="dark">계정을 확인하세요</Alert> */}
 	</div>);
 }
 

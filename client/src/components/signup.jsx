@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { Button, Form, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import registerAPI from "../api/registerAPI";
+import AccountAPI from "../api/AccountAPI";
 
 function Signup() {
 	const navigator = useNavigate();
@@ -20,7 +20,7 @@ function Signup() {
 	
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		registerAPI
+		AccountAPI('http://192.168.4.123:8080')
 			.signup(email.current.value, password.current.value, name.current.value, gender.current.value, Number(birth.current.value))
 			.then(ret => {
 				console.log(ret);
