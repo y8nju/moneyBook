@@ -2,7 +2,7 @@ import { Card } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from "react-router-dom";
 
-function Main() {    
+function Main(historyAPI, logon) {    
 	const navigate = useNavigate();
 	const moveLogin = () => {
 		navigate('/login');

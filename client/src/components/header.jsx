@@ -2,15 +2,17 @@ import { Button } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 
 function Header({logon, setLogon}) {
+	const navigator =useNavigate();
 
 	const handelLogout = () => {	// 로그아웃 버튼 누르면
 		// localStorage에서 token 지우기
 		localStorage.removeItem("token");
 		// logon은 null로 바꾸기
 		setLogon(null);
+		navigator('/login')
 	}
 	return ( <Navbar collapseOnSelect expand="lg" fixed="top" bg="white" variant="light" className="navbar-expand-lg">
 		<Container>
@@ -20,7 +22,7 @@ function Header({logon, setLogon}) {
 			
 			<Navbar.Collapse id="responsive-navbar-nav">
 				<Nav className="me-auto">
-					<Link to="/" className="nav-link">습관확인</Link>
+					<Link to="/history" className="nav-link">습관확인</Link>
 				</Nav>
 				<Nav>
 					{/* router-dom Link */}

@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 const historySchema = new mongoose.Schema({
+    user: String,
     pattern: String,
     date: Date,
     useDesc: {
@@ -8,7 +9,7 @@ const historySchema = new mongoose.Schema({
     },
     cashAmt: Number, 
     cardAmt: Number,
-    catefory: String,
+    category: String,
     tag: String
 })
 export default mongoose.model('history', historySchema)

@@ -1,9 +1,9 @@
 import { useRef } from "react";
-import { Button, Form, InputGroup, Row } from "react-bootstrap";
+import { Button, Form, InputGroup } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 
-function Write({historyAPI, setShow}) {
+function Write({historyAPI, setLastAccess, setShow}) {
 	const navigator =useNavigate();
 
 	const pattern = useRef();
@@ -11,26 +11,27 @@ function Write({historyAPI, setShow}) {
 	const useDesc = useRef();
 	const cashAmt = useRef();
 	const cardAmt = useRef();
-	const catefory = useRef();
+	const category = useRef();
 	const tag = useRef();
-	console.log(historyAPI.addHistory)
 	
 	const handleSubmit = (evnet) => {
 		evnet.preventDefault();
 		historyAPI
-			.addHistory(pattern.current.value, date.current.value, useDesc.current.value, cashAmt.current.value, cardAmt.current.value, catefory.current.value, tag.current.value)
+			.addHistory(pattern.current.value, date.current.value, useDesc.current.value, cashAmt.current.value, cardAmt.current.value, category.current.value, tag.current.value)
 			.then(received => {
 				if(received.result) {
 					if(setShow) {
 						setShow(false);
+						evnet.target.reset();
+						setLastAccess(Date.now());
 					}
-					navigator('/')
+					navigator('/history')
 				}
 			})
 			.catch(e => {
 				console.log(e)
 			})
-		console.log(pattern.current.value, date.current.value, useDesc.current.value, cashAmt.current.value, cardAmt.current.value, catefory.current.value, tag.current.value)
+		console.log(pattern.current.value, date.current.value, useDesc.current.value, cashAmt.current.value, cardAmt.current.value, category.current.value, tag.current.value)
 	}
 	return ( <Form className="d-flex flex-column align-items-center mx-auto" id="write" onSubmit={handleSubmit}>
 		<InputGroup className="mb-3">
@@ -75,7 +76,7 @@ function Write({historyAPI, setShow}) {
 	  </InputGroup>
 		<InputGroup className="mb-3">
 			<InputGroup.Text id="basic-addon1">카테고리</InputGroup.Text>
-			<Form.Select ref={catefory} defaultValue="미분류">
+			<Form.Select ref={category} defaultValue="미분류">
 				<option value="미분류">미분류</option>
 				<option value="식비">식비</option>
 				<option value="주거/통신">주거/통신</option>

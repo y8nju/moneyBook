@@ -23,20 +23,44 @@ router.use((req, res, next) => {
 	}
 	next();
 })
-
-router.get('/', (req, res) => {
-	console.log(req.logonEmail )
-	return res.status(200).json({result: true, datas:[]});
+/* 조회 */
+router.get('/', async (req, res) => {
+	const month = req.query.month;   // 2022-08
+    const parsed = month.split("-");
+	const begin = new Date(`${parsed[0]}-${parsed[1]}-01`);      
+    const end = new Date(parsed[0], parsed[1], 1);    
+    console.log(begin, end);
+	console.log(month)
+	try{
+		const histories =await History.find({
+			user: req.logonEmail,
+			date: {$gte : begin, $lt : end} 
+		}).sort('-date').lean();
+		return res.status(200).json({result: true, datas: histories});
+	}catch(err) {
+		console.log(err);
+		res.status(500).send({result:false, message: err.message});
+	}
 })
-router.get('/delete', (req, res) => {
+/* 삭제 */
+router.post('/delete', async (req, res) => {
 	console.log(req.logonEmail )
-	return res.status(200).json({result: false});
+	console.log( req.body.data)
+	try {
+		let deleteItem = await History.deleteMany({_id: req.body.data})
+		res.status(200).json({result: false});
+	} catch(e) {
+		res.status(409).json({result: false, message: e.message});
+		console.log(e.message)
+	}
 })
+/* 입력 */
 router.post('/write', async (req, res) =>{
 	console.log({...req.body})
 	try {
-		let data = await History.create({...req.body});
-		res.status(201).json({result: true, message: data});
+		let data = await History.create({...req.body, user: req.logonEmail});
+		// ✨server에서 user 정보를 넘겨준다
+		res.status(201).json({result: true, data: data});
 		console.log(data);
 	} catch(e) {
 		res.status(409).json({result: false, message: e.message});
