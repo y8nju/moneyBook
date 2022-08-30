@@ -13,9 +13,12 @@ import Write from "./components/write";
 import History from "./components/history";
 import Report from "./components/report";
 
-const accountAPI = new AccountAPI('http://3.36.73.76:8080');
-const historyAPI = new HistoryAPI('http://3.36.73.76:8080');
+// aws 퍼블릭 IPv4 주소(build 할 때, 아래로 변경)
+// const accountAPI = new AccountAPI('http://3.36.73.76:8080');
+// const historyAPI = new HistoryAPI('http://3.36.73.76:8080');
 
+const accountAPI = new AccountAPI('http://127.0.0.1:8080');
+const historyAPI = new HistoryAPI('http://127.0.0.1:8080');
 function App() {
 	// Link 는 특정 주소로 이동해주는 태그였다면, Navigate 는 특정 행동을 했을 때 해당 주소로 이동해줄 수 있게 만들어줍니다.
 	// logon 상태 관리(로그인이 되면 setLogon은 true가 된다)
