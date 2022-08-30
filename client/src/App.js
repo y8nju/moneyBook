@@ -11,6 +11,7 @@ import Login from "./components/login";
 import Signup from "./components/signup";
 import Write from "./components/write";
 import History from "./components/history";
+import Report from "./components/report";
 
 const accountAPI = new AccountAPI('http://192.168.4.123:8080');
 const historyAPI = new HistoryAPI('http://192.168.4.123:8080');
@@ -41,6 +42,7 @@ function App() {
 							<Route path="/" element={<Main historyAPI={historyAPI } logon={logon}/>} />
 							<Route path="/history" element={<History historyAPI={historyAPI } logon={logon}/>} />
 							<Route path="/write" element={<Write historyAPI={historyAPI } />} />
+							<Route path="/report" element={<Report historyAPI={historyAPI } logon={logon} />} />
 							<Route path="/login" element={<Login accountAPI={accountAPI} setLogon={setLogon}/>} />
 							<Route path="/register" element={<Signup accountAPI={accountAPI} />} />
 						</Route>

@@ -42,6 +42,24 @@ router.get('/', async (req, res) => {
 		res.status(500).send({result:false, message: err.message});
 	}
 })
+router.get('/search', async (req, res) => {
+	const begin = new Date(req.query.begin);    // 2022-03-01
+    const end = new Date(req.query.end);        // 2022-04-07
+    end.setDate(end.getDate()+1);
+	console.log(begin, end)
+	try{
+		const histories =await History.find({
+            account : req.logonEmail, 
+            date : {$gte : begin, $lt : end},
+            
+        }).sort("-date").lean();
+		console.log(histories)
+		return res.status(200).json({result: true, datas: histories});
+	}catch(err) {
+		console.log(err);
+		res.status(500).send({result:false, message: err.message});
+	}
+})
 /* 삭제 */
 router.post('/delete', async (req, res) => {
 	console.log(req.logonEmail )

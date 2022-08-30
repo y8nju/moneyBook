@@ -23,6 +23,7 @@ function Header({logon, setLogon}) {
 			<Navbar.Collapse id="responsive-navbar-nav">
 				<Nav className="me-auto">
 					<Link to="/history" className="nav-link">습관확인</Link>
+					<Link to="/report" className="nav-link">습관조회</Link>
 				</Nav>
 				<Nav>
 					{/* router-dom Link */}

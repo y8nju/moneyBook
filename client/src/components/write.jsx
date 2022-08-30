@@ -13,6 +13,7 @@ function Write({historyAPI, setLastAccess, setShow}) {
 	const cardAmt = useRef();
 	const category = useRef();
 	const tag = useRef();
+	const today = new Date().toISOString().slice(0, 10)
 	
 	const handleSubmit = (evnet) => {
 		evnet.preventDefault();
@@ -48,6 +49,7 @@ function Write({historyAPI, setLastAccess, setShow}) {
 			aria-label="Username"
 			aria-describedby="basic-addon1"
 			name="useDate"
+			defaultValue={today}	// 오늘 날짜를 default로 설정
 			/>
 	  </InputGroup>
 		<InputGroup className="mb-3">

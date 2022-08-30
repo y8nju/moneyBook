@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Button, Col, Container, Form, InputGroup, ListGroup, Modal, Row, Table } from "react-bootstrap";
+import HistoryChart from "./historyChart";
 import HIstoryTable from "./historyTable";
 import Write from "./write";
 
@@ -7,20 +8,20 @@ function History({datas, historyAPI, logon}) {
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
 	const [show, setShow] = useState(false);
-    const [items, setItems] = useState([]);
+	const [items, setItems] = useState([]);
 	const [chkItems, setChkItems] = useState([]);
 	const [month, setMonth] = useState(new Date().toISOString().slice(0, 7)); // month값 변경
 	const [lastAccess, setLastAccess] = useState();	// 리스트가 변경 됐을 때(write, delete)
 	const monthRef = useRef();
 
-    useEffect(() => {
+	useEffect(() => {
 		monthRef.current.value = month;
-        historyAPI.history(month).then(received => {
-            if (received.result) {
-                setItems(received.datas);
-            }
-        });
-    }, [month, lastAccess])	// month와 lastAccess가 변경될 때마다 작동
+		historyAPI.history(month).then(received => {
+			if (received.result) {
+				setItems(received.datas);
+			}
+		});
+	}, [month, lastAccess])	// month와 lastAccess가 변경될 때마다 작동
 	
 	const handleChecked= (checked, id) => {	// 체크박스가 선택된 아이템 처리하기
 		if(checked) {
@@ -40,7 +41,6 @@ function History({datas, historyAPI, logon}) {
 			console.log(chkItems);
 			setLastAccess(Date.now());
 	}
-
 	return ( <Container>
 		<Row>
 			<Col sm={3}>
@@ -80,6 +80,7 @@ function History({datas, historyAPI, logon}) {
 							/>
 					</InputGroup>
 				</Container>
+				<HistoryChart  historyAPI={historyAPI } datas={items} />
 				<Container>
 					<Table striped className="border-top text-center">
 						<thead className="w-100">
